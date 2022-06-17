@@ -1,0 +1,4 @@
+- name: reiniciar_servicio
+  service:
+    name: unattended-upgrades
+    state: restarted

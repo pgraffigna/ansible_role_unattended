@@ -1,0 +1,15 @@
+---
+- name: ejecutar unattended_upgrades
+  cron:
+    name: "unattended"
+    user: root
+    day: "15"
+    minute: "*"
+    hour: "2"
+    job: "/usr/bin/unattended-upgrade -v"
+
+- name: notificacion
+  cronvar:
+    name: MAILTO
+    user: "{{ usuario }}"
+    value: "{{ mail }}"

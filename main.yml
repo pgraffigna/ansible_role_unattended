@@ -1,0 +1,8 @@
+---
+- hosts: vagrant
+  become: yes
+
+  roles:
+    - unattended
+    - cron
+

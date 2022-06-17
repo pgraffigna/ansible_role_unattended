@@ -1,0 +1,18 @@
+---
+- name: "Ansible Lineinfile Multiple Lines"
+  lineinfile:
+    path: /etc/apt/apt.conf.d/50unattended-upgrades
+    regexp: '{{item.From}}'
+    line: '{{item.To}}'
+    state: present
+  with_items:
+    - { From: '//Unattended-Upgrade::MailReport "only-on-error";', To: 'Unattended-Upgrade::MailReport "only-on-error";'}
+    - { From: '//Unattended-Upgrade::MinimalSteps "true";', To: 'Unattended-Upgrade::MinimalSteps "true";'}
+    - { From: '//Unattended-Upgrade::Remove-Unused-Dependencies "false";', To: 'Unattended-Upgrade::Remove-Unused-Dependencies "true";'}
+    - { From: '//Unattended-Upgrade::Automatic-Reboot "false";', To: 'Unattended-Upgrade::Automatic-Reboot "true";'}
+    - { From: '//Unattended-Upgrade::Automatic-Reboot-WithUsers "true";', To: 'Unattended-Upgrade::Automatic-Reboot-WithUsers "true";'}
+    - { From: '//Unattended-Upgrade::Skip-Updates-On-Metered-Connections "true";', To: 'Unattended-Upgrade::Skip-Updates-On-Metered-Connections "true";'}
+    - { From: '//Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";', To: 'Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";'}
+  notify: reiniciar_servicio
+
+
