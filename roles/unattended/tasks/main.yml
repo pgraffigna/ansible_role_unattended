@@ -1,5 +1,11 @@
 ---
-- name: "Ansible Lineinfile Multiple Lines"
+- name: instalando dependencias
+  apt:
+    name: ['unattended-upgrades']
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: configurando unattended-upgrades
   lineinfile:
     path: /etc/apt/apt.conf.d/50unattended-upgrades
     regexp: '{{item.From}}'
