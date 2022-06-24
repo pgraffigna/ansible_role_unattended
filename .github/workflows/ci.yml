@@ -1,0 +1,32 @@
+---
+name: Molecule
+'on':
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configurando Python3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Instalando dependencias
+        run: pip3 install ansible ansible-lint yamllint "molecule[lint,docker]"
+
+      - name: Instalando dependecias Galaxy
+        run: ansible-galaxy collection install community.docker
+
+      - name: Ejecutando molecule
+        run: molecule test
+        env: 
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          #MOLECULE_DISTRO: ${{ matrix.distro }} - multiples distros 

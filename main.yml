@@ -1,8 +1,7 @@
 ---
-- hosts: vagrant
+- hosts: all
   become: yes
 
   roles:
     - unattended
     - cron
-
